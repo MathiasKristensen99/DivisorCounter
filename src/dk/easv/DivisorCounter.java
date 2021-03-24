@@ -18,10 +18,16 @@ public class DivisorCounter implements Runnable, Callable<Result> {
 
     @Override
     public void run() {
-        call();
+        try {
+            while (true) {
+                call();
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
-    public static Result getBestResult() {
+        public static Result getBestResult() {
         Result result = new Result(0, 0);
         for(Result r : results) {
             if (r.getDivisorCounter() > result.getDivisorCounter()) {
@@ -36,7 +42,7 @@ public class DivisorCounter implements Runnable, Callable<Result> {
         Result result = new Result(0, 0);
         for(int i = minimum; i <= maximum; i++) {
             int counter = 0;
-            for(int j = minimum; j<=i; j++) {
+            for(int j = 1; j<=i; j++) {
                 if(i % j == 0) {
                     counter++;
                 }
